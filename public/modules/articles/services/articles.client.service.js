@@ -17,10 +17,6 @@ angular.module('articles').factory('MyArticles', ['$resource',
   function($resource) {
     return $resource('myarticles/:articleId', {
       articleId: '@_id'
-    }, {
-      update: {
-        method: 'PUT'
-      }
     });
   }
 ]);
