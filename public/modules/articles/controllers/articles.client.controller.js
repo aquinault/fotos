@@ -9,13 +9,15 @@ angular.module('articles').controller('ArticlesController', ['$scope',
     $scope.create = function() {
       var article = new Articles({
         title: this.title,
-        content: this.content
+        content: this.content,
+        image: this.image
       });
       article.$save(function(response) {
         $location.path('articles/' + response._id);
 
         $scope.title = '';
         $scope.content = '';
+        $scope.image = '';
       }, function(errorResponse) {
         $scope.error = errorResponse.data.message;
       });

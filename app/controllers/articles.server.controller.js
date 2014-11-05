@@ -6,7 +6,15 @@
 var mongoose = require('mongoose'),
   errorHandler = require('./errors'),
   Article = mongoose.model('Article'),
-  _ = require('lodash');
+  _ = require('lodash'),
+  cloudinary = require('cloudinary');
+
+
+cloudinary.config({
+  cloud_name: 'dtrwlfo4w',
+  api_key: '449479863253595',
+  api_secret: 'yRaV9X6xsd-yzPdUIICSgBPRUKw'
+});
 
 /**
  * Create a article
@@ -15,15 +23,27 @@ exports.create = function(req, res) {
   var article = new Article(req.body);
   article.user = req.user;
 
-  article.save(function(err) {
-    if (err) {
-      return res.status(400).send({
-        message: errorHandler.getErrorMessage(err)
-      });
-    } else {
-      res.jsonp(article);
-    }
+  console.log(req);
+  console.log(req.files);
+
+  cloudinary.uploader.upload(req.files.image.path, function(
+    result) {
+    console.log(result);
+    article.img = result.url;
+
+    article.save(function(err) {
+      if (err) {
+        return res.status(400).send({
+          message: errorHandler.getErrorMessage(err)
+        });
+      } else {
+        res.jsonp(article);
+      }
+    });
+
   });
+
+
 };
 
 /**
