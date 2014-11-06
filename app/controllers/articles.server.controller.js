@@ -16,17 +16,81 @@ cloudinary.config({
   api_secret: 'yRaV9X6xsd-yzPdUIICSgBPRUKw'
 });
 
+
+var uuid = require('node-uuid'),
+  multiparty = require('multiparty');
+var fs = require('fs');
 /**
  * Create a article
  */
 exports.create = function(req, res) {
-  var article = new Article(req.body);
-  article.user = req.user;
+  //var article = new Article(req.body);
 
+  var form = new multiparty.Form();
+  form.parse(req, function(err, fields, files) {
+
+    console.log(err);
+    console.log(fields);
+    console.log(files);
+
+
+    cloudinary.uploader.upload(files.image[0].path, function(
+      result) {
+      console.log(result);
+
+
+      var article = new Article();
+      article.content = fields.content;
+      article.title = fields.title;
+      article.user = req.user;
+
+
+      article.img = result.url;
+
+      article.save(function(err) {
+        if (err) {
+          return res.status(400).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        } else {
+          res.jsonp(article);
+        }
+      });
+
+    });
+  });
+};
+/*
+    var file = files.image[0];
+    var contentType = file.headers['content-type'];
+    var tmpPath = file.path;
+    var extIndex = tmpPath.lastIndexOf('.');
+    var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
+    // uuid is for generating unique filenames.
+    var fileName = uuid.v4() + extension;
+    var destPath = 'd:/Progs/data' +
+      fileName;
+
+    // Server side file type checker.
+    if (contentType !== 'image/png' && contentType !== 'image/jpeg') {
+      fs.unlink(tmpPath);
+      return res.status(400).send('Unsupported file type.');
+    }
+
+    fs.rename(tmpPath, destPath, function(err) {
+      if (err) {
+        return res.status(400).send('Image is not saved:');
+      }
+      return res.json(destPath);
+    });
+  });
+*/
+/*
   console.log(req);
+  console.log(req.body);
   console.log(req.files);
 
-  cloudinary.uploader.upload(req.files.image.path, function(
+  cloudinary.uploader.upload(req.body.image, function(
     result) {
     console.log(result);
     article.img = result.url;
@@ -42,9 +106,8 @@ exports.create = function(req, res) {
     });
 
   });
+*/
 
-
-};
 
 /**
  * Show the current article
@@ -129,10 +192,12 @@ exports.mylist = function(req, res) {
  * Article middleware
  */
 exports.articleByID = function(req, res, next, id) {
-  Article.findById(id).populate('user', 'displayName').exec(function(err,
+  Article.findById(id).populate('user', 'displayName').exec(function(
+    err,
     article) {
     if (err) return next(err);
-    if (!article) return next(new Error('Failed to load article ' + id));
+    if (!article) return next(new Error('Failed to load article ' +
+      id));
     req.article = article;
     next();
   });

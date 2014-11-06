@@ -6,11 +6,23 @@ angular.module('articles').controller('ArticlesController', ['$scope',
     MyArticles) {
     $scope.authentication = Authentication;
 
+    $scope.setFiles = function(element) {
+      $scope.$apply(function(scope) {
+        console.log('files:', element.files);
+        // Turn the FileList object into an Array
+        scope.files = [];
+        for (var i = 0; i < element.files.length; i++) {
+          scope.files.push(element.files[i]);
+        }
+        scope.progressVisible = false;
+      });
+    };
+
     $scope.create = function() {
       var article = new Articles({
         title: this.title,
         content: this.content,
-        image: this.image
+        image: $scope.files[0]
       });
       article.$save(function(response) {
         $location.path('articles/' + response._id);

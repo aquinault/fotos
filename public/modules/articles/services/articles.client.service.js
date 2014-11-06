@@ -8,7 +8,30 @@ angular.module('articles').factory('Articles', ['$resource',
     }, {
       update: {
         method: 'PUT'
+      },
+      save: {
+        method: 'POST',
+        headers: {
+          'Content-Type': undefined
+        },
+        //transformRequest: angular.identity
+
+        transformRequest: function(data) {
+          var formData = new FormData();
+          formData.append("content", angular.toJson(data.content));
+          formData.append("title", angular.toJson(data.title));
+          formData.append("image", data.image);
+
+          //for (var i = 0; i < data.files; i++) {
+          //add each file to the form data and iteratively name them
+          //formData.append("file" + i, data.files[i]);
+          //}
+
+          return formData;
+        }
+
       }
+
     });
   }
 ]);
