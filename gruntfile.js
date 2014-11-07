@@ -77,7 +77,8 @@ module.exports = function(grunt) {
     less: {
       build: {
         files: {
-          'public/modules/articles/css/card.css': 'public/modules/articles/css/card.less'
+          'public/modules/articles/css/card.css': 'public/modules/articles/css/card.less',
+          'public/modules/articles/css/card-detail.css': 'public/modules/articles/css/card-detail.less',
         }
       }
     },
