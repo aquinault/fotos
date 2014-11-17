@@ -1,7 +1,7 @@
 <section data-ng-controller="ArticlesController" data-ng-init="findOne()">
-	<div class="page-header">
+	<!--div class="page-header">
 		<h1 data-ng-bind="article.title"></h1>
-	</div>
+	</div-->
 	<div class="pull-right" data-ng-show="authentication.user._id == article.user._id">
 		<a class="btn btn-primary" href="/#!/articles/{{article._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
@@ -18,5 +18,23 @@
 			<span data-ng-bind="article.user.displayName"></span>
 		</em>
 	</small>
-	<p class="lead" data-ng-bind="article.content"></p>
+	<!--p class="lead" data-ng-bind="article.content"></p-->
+
+<div class="container-fluid">
+<div class="row">
+
+	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+		<div class="card-detail">
+			<!--div class="card-detail-header" ng-style="{'background': 'url({{article.img}})', 'background-size': 'cover'}" ></div-->
+
+				<img ng-src="{{article.img}}">
+				<div class="name" data-ng-bind="article.title"></div>
+				<div class="description" data-ng-bind="article.content"></div>
+				<div class="price-body"><span class="price">50</span><span class="glyphicon glyphicon-euro euro"></span></div>
+			</div>
+	</div>
+
+</div>
+</div>
+
 </section>

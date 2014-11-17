@@ -1,24 +1,23 @@
-.card-detail {
-  width: 320px;
-  height: 370px;
-  background-color: rgba(255, 255, 255, .6);
-  border-radius: 10px;
-  margin: 20px auto;
-  box-shadow: 0 0 5px 3px rgba(0,0,0,0.1), 2px 2px 8px rgba(0,0,0,0.1);
-  .card-detail-header{
-    height: 220px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    //background: url('../img/TShirt.jpg');
-    //background-size: cover;
-  }
-  .card-detail-body {
+  .card-detail {
     position: relative;
+    width: 320px;
+    height: auto;
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 10px;
+    margin: 20px auto;
+    box-shadow: 0 0 5px 3px rgba(0,0,0,0.1), 2px 2px 8px rgba(0,0,0,0.1);
+
+    img {
+      width: 100%;
+      height: auto;
+    }
     .name {
       font-size: 20px;
       text-align: center;
-      padding-top: 30px;
-      margin-bottom: 10px;
+
+      overflow: hidden;
+      white-space: nowrap; /* Don't forget this one */
+      text-overflow: ellipsis;
     }
     .description {
       font-size: 15px;
@@ -26,6 +25,12 @@
       //line-height: 1.5;
       text-align: center;
       margin-bottom: 10px;
+
+      overflow: hidden;
+      white-space: nowrap; /* Don't forget this one */
+      text-overflow: ellipsis;
+      height:20px;
+      line-height:20px;
     }
     .price-body {
       text-align: center;
@@ -34,10 +39,14 @@
       font-size: 30px;
       letter-spacing: 2px;
       text-transform: uppercase;
+      margin-bottom: 10px;
+
+      overflow: hidden;
+      white-space: nowrap; /* Don't forget this one */
+      text-overflow: ellipsis;
     }
     .euro {
       font-size: 20px;
     }
 
   }
-}

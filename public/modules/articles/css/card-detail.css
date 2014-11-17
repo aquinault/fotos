@@ -1,39 +1,49 @@
 .card-detail {
+  position: relative;
   width: 320px;
-  height: 370px;
+  height: auto;
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 10px;
   margin: 20px auto;
   box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.1), 2px 2px 8px rgba(0, 0, 0, 0.1);
 }
-.card-detail .card-detail-header {
-  height: 220px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+.card-detail img {
+  width: 100%;
+  height: auto;
 }
-.card-detail .card-detail-body {
-  position: relative;
-}
-.card-detail .card-detail-body .name {
+.card-detail .name {
   font-size: 20px;
   text-align: center;
-  padding-top: 30px;
-  margin-bottom: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Don't forget this one */
+  text-overflow: ellipsis;
 }
-.card-detail .card-detail-body .description {
+.card-detail .description {
   font-size: 15px;
   padding: 0 25px;
   text-align: center;
   margin-bottom: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Don't forget this one */
+  text-overflow: ellipsis;
+  height: 20px;
+  line-height: 20px;
 }
-.card-detail .card-detail-body .price-body {
+.card-detail .price-body {
   text-align: center;
 }
-.card-detail .card-detail-body .price {
+.card-detail .price {
   font-size: 30px;
   letter-spacing: 2px;
   text-transform: uppercase;
+  margin-bottom: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Don't forget this one */
+  text-overflow: ellipsis;
 }
-.card-detail .card-detail-body .euro {
+.card-detail .euro {
   font-size: 20px;
 }

@@ -22,11 +22,14 @@ module.exports = {
         'public/lib/angular-ui-router/release/angular-ui-router.js',
         'public/lib/angular-ui-utils/ui-utils.js',
         'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
-        'public/lib/angular-file-upload/angular-file-upload.js'
+        'public/lib/angular-file-upload/angular-file-upload.js',
+        'public/lib/angular-carousel/dist/angular-carousel.min.js',
+        'public/lib/angular-touch/angular-touch.min.js'
       ]
     },
     css: [
-      'public/modules/**/css/*.css'
+      'public/modules/**/css/*.css',
+      'public/lib/angular-carousel/dist/angular-carousel.min.css'
     ],
     js: [
       'public/config.js',
